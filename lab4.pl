@@ -61,8 +61,8 @@ shortest(A,B,Path,Length) :-
 % Determine best path of the set
 bestpath([Head|Tail],CurrentPath) :- best(Tail,Head,CurrentPath).
 
-% Compare lengths of paths
+% Pick the best path by comparing the lengths of each.
 
-best([],CurrentPath,CurrentPath).
-best([[Path,Length]|RemainPaths],[_,CurrentPath],Min) :- Length < CurrentPath, !, best(RemainPaths,[Path,Length],Min). 
-best([_|RemainPaths],CurrentPath,Min) :- best(RemainPaths,CurrentPath,Min).
+best([],T,T).
+best([[Path,Length]|Remaining],[_,Current],Min) :- Length < Current, !, best(Remaining,[Path,Length],Min). 
+best([_|Remaining],Current,Min) :- best(Remaining,Current,Min).
